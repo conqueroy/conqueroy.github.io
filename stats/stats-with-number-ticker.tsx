@@ -71,7 +71,7 @@ function AnimatedNumber({
   value: number;
   initial?: number;
 }) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref);
 
   const spring = useSpring(initial, { mass: 0.8, stiffness: 75, damping: 15 });
