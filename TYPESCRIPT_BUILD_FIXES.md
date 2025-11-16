@@ -267,4 +267,25 @@ For questions about this deployment setup, refer to the Git history for context 
 3. Fix TypeScript error in CardItem component
 4. Move UI components to components/ui/ directory
 5. Fix useRef type in animated-modal component
-6. (This commit) Fix all remaining TypeScript errors
+6. Fix all remaining TypeScript errors
+7. Fix useOutsideClick hook signature for nullable refs
+
+### Additional Fix: Hook Signatures
+
+When custom hooks accept refs, they must account for the null possibility:
+
+```typescript
+// WRONG - expects non-nullable ref
+export const useOutsideClick = (
+  ref: React.RefObject<HTMLDivElement>,
+  callback: Function
+) => { ... }
+
+// CORRECT - accepts nullable ref (React 19 standard)
+export const useOutsideClick = (
+  ref: React.RefObject<HTMLDivElement | null>,
+  callback: Function
+) => { ... }
+```
+
+This is because `useRef<T>(null)` in React 19 creates `RefObject<T | null>`.
