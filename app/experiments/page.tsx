@@ -102,14 +102,11 @@ export default function WorkPage() {
         <div className="mx-auto max-w-[1920px]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
             {experiments.map((project, index) => {
-              const CardWrapper = project.href && !project.comingSoon ? Link : 'div';
-              const wrapperProps = project.href && !project.comingSoon ? { href: project.href } : {};
+              const isLinkable = project.href && !project.comingSoon;
+              const cardClassName = `group relative block aspect-[1/1.1] w-full overflow-hidden rounded-2xl ${project.comingSoon ? 'cursor-not-allowed' : ''}`;
 
-              return (
-                <CardWrapper
-                  key={project.title}
-                  {...wrapperProps}
-                  className={`group relative block aspect-[1/1.1] w-full overflow-hidden rounded-2xl ${project.comingSoon ? 'cursor-not-allowed' : ''}`}>
+              const cardContent = (
+                <>
                   {project.imageUrl ?
                   <Image
                     src={project.imageUrl}
@@ -210,8 +207,8 @@ export default function WorkPage() {
                     null}
 
                     <div className={`absolute bottom-0 right-0 transition-opacity duration-300 ${
-                      project.comingSoon 
-                        ? "opacity-100 md:opacity-0 md:group-hover:opacity-100" 
+                      project.comingSoon
+                        ? "opacity-100 md:opacity-0 md:group-hover:opacity-100"
                         : "opacity-0 group-hover:opacity-100"
                     }`}>
                       <p className="text-sm font-medium text-white">
@@ -219,8 +216,25 @@ export default function WorkPage() {
                       </p>
                     </div>
                   </div>
-                </CardWrapper>);
+                </>
+              );
 
+              return isLinkable && project.href ? (
+                <Link
+                  key={project.title}
+                  href={project.href}
+                  className={cardClassName}
+                >
+                  {cardContent}
+                </Link>
+              ) : (
+                <div
+                  key={project.title}
+                  className={cardClassName}
+                >
+                  {cardContent}
+                </div>
+              );
             })}
           </div>
         </div>
