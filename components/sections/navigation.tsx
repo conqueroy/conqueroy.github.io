@@ -37,17 +37,8 @@ export default function Navigation() {
         }`}
       >
         <nav className="hidden lg:flex items-center justify-between w-full">
-          <Link href="/">
-            <Image
-              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/e26b9d0c-b6bb-449f-b032-8f1bb18f4990-kevinhipke-com/assets/svgs/KEVIN-1-1.svg?"
-              alt="KEVIN logo part"
-              width={242}
-              height={80}
-              priority
-              className="h-[80px] w-auto"
-            />
-          </Link>
-          
+          <div className="h-[80px] w-[242px]" aria-hidden="true" />
+
           <div className="flex items-center border border-neutral-200 rounded-full h-[46px] px-2 bg-white">
             {navItems.map((item) => (
               <Link
@@ -60,16 +51,7 @@ export default function Navigation() {
             ))}
           </div>
 
-          <Link href="/">
-            <Image
-              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/e26b9d0c-b6bb-449f-b032-8f1bb18f4990-kevinhipke-com/assets/svgs/HIPKE-1-2.svg?"
-              alt="HIPKE logo part"
-              width={244}
-              height={80}
-              priority
-              className="h-[80px] w-auto"
-            />
-          </Link>
+          <div className="h-[80px] w-[244px]" aria-hidden="true" />
         </nav>
         
         <div className="lg:hidden w-full px-5">
